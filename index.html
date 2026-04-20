@@ -1,0 +1,610 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2685.5">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;🌸 PinSaver • Pinterest Board Image Downloader 🌸&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>* {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-sizing: border-box;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>body {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(135deg, #ffe6f0 0%, #ffd9e8 50%, #ffe0ed 100%);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Segoe UI', 'Quicksand', 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>min-height: 100vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>justify-content: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: relative;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>overflow-x: hidden;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* floating hearts background */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>body::before {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>content: "💗💕💖🌸🎀💗";</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: fixed;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 60px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>opacity: 0.05;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>pointer-events: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>white-space: pre;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>top: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>left: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>word-break: break-all;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>z-index: 0;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.main-card {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>max-width: 700px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: rgba(255, 255, 255, 0.96);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 70px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 30px 60px rgba(231, 103, 146, 0.25), 0 10px 30px rgba(0, 0, 0, 0.1);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>overflow: hidden;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: relative;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>z-index: 1;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>backdrop-filter: blur(2px);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: transform 0.3s ease;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.main-card:hover {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: translateY(-5px);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* header section */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.header-section {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(120deg, #ff98bb, #ff7aa8);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 35px 30px 25px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-bottom: 4px solid #ffeef4;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.emoji-title {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 3.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>animation: bounce 2s infinite;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>@keyframes bounce {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>0%, 100% { transform: translateY(0); }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>50% { transform: translateY(-8px); }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>h1 {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 2.2rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 800;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>letter-spacing: -0.5px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-shadow: 2px 2px 0 #c45a82;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.tagline {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #fff0f5;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: rgba(255, 255, 255, 0.25);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: inline-block;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 5px 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 50px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>backdrop-filter: blur(4px);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* form area */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.form-area {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 35px 30px 25px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.input-wrapper {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #fff5f9;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 60px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 5px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 2px solid #ffbfd5;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: all 0.3s;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.input-wrapper:focus-within {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-color: #f26b9b;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 0 0 4px #ffbfd580;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.pinterest-input {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 18px 25px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: transparent;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: inherit;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>outline: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #4a2a38;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 500;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.pinterest-input::placeholder {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #e2a9c0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 400;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.examples {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gap: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex-wrap: wrap;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 28px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>justify-content: center;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.example-badge {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #ffeef4;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 6px 16px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 50px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.8rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #d46b94;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: 0.2s;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 500;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.example-badge:hover {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #ffc0db;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #a13e64;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: scale(1.02);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.download-btn {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(135deg, #ff8eb5, #ff6b9d);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 18px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 60px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1.3rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: bold;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: 0.2s;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>justify-content: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gap: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: inherit;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 6px 20px #ff8eb580;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.download-btn:hover:not(:disabled) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: scale(0.98);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 4px 15px #ff6b9d;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(135deg, #ff7aa8, #ff5a8f);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.download-btn:disabled {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>opacity: 0.7;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: not-allowed;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* status card */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.status-container {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 0 30px 25px 30px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #fff0f5;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 40px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 18px 22px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-left: 6px solid #ff98bb;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: all 0.3s;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.status-message {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gap: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #b84a72;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 500;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex-wrap: wrap;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.loader {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 26px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 26px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 3px solid #ffbfd5;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-top: 3px solid #e85f91;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>animation: spin 0.8s linear infinite;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>@keyframes spin {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>to { transform: rotate(360deg); }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.success-icon {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.progress-text {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.85rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #c95f89;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* footer */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.footer {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #fff5f9;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 18px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.75rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #e7a1bd;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-top: 1px solid #ffdbe9;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>@media (max-width: 550px) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.main-card {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>border-radius: 40px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>h1 {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>font-size: 1.6rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.download-btn {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>font-size: 1.1rem;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>padding: 14px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;div class="main-card"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="header-section"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="emoji-title"&gt;📌💾✨&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h1&gt;PinSaver&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="tagline"&gt;paste any Pinterest board → get ALL images as ZIP 💕&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="form-area"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="input-wrapper"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;input type="text" id="pinterestUrl" class="pinterest-input"<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                   </span>placeholder="https://www.pinterest.com/username/board-name/ ... or any pin URL"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="examples"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;span class="example-badge" data-url="https://www.pinterest.com/pinterest/official-ideas/"&gt;🎨 example board&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;span class="example-badge" data-url="https://www.pinterest.com/pin/123456789/"&gt;📌 example pin&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;span class="example-badge" data-url="https://www.pinterest.com/cafe/coffee-love/"&gt;☕ cafe inspo&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button id="downloadBtn" class="download-btn"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>💖🌸 DOWNLOAD ZIP 🌸💖</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="status-container" id="statusContainer"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="status-message" id="statusMessage"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>💬 ready! paste a public Pinterest board link above</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="footer"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>💗 100% free • extracts original quality images • works with public boards 💗</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>// ============================================================</p>
+<p class="p1"><span class="Apple-converted-space">    </span>// PINTEREST IMAGE SCRAPER - FULLY FUNCTIONAL USING FREE PROXY</p>
+<p class="p1"><span class="Apple-converted-space">    </span>// ============================================================</p>
+<p class="p1"><span class="Apple-converted-space">    </span>// This uses a CORS proxy + Pinterest's public data extraction</p>
+<p class="p1"><span class="Apple-converted-space">    </span>// No backend needed - runs entirely in the browser!</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const urlInput = document.getElementById('pinterestUrl');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const downloadBtn = document.getElementById('downloadBtn');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const statusMessageDiv = document.getElementById('statusMessage');</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Multiple fallback proxies for reliability</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const PROXIES = [</p>
+<p class="p1"><span class="Apple-converted-space">        </span>'https://api.allorigins.win/raw?url=',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>'https://cors-anywhere.herokuapp.com/',</p>
+<p class="p1"><span class="Apple-converted-space">        </span>'https://corsproxy.io/?'</p>
+<p class="p1"><span class="Apple-converted-space">    </span>];</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>let currentProxyIndex = 0;</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function updateStatus(message, isLoading = false, isError = false, progress = null) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if (isLoading) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>statusMessageDiv.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="loader"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span&gt;${message}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>${progress ? `&lt;div class="progress-text"&gt;${progress}&lt;/div&gt;` : ''}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const icon = isError ? '💔' : '🌸';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>statusMessageDiv.innerHTML = `${icon} &lt;span&gt;${message}&lt;/span&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (isError) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>statusMessageDiv.style.color = "#c7362e";</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>statusMessageDiv.style.color = "#b84a72";</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Function to fetch page content with proxy fallback</p>
+<p class="p1"><span class="Apple-converted-space">    </span>async function fetchWithProxy(url) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>for (let i = 0; i &lt; PROXIES.length; i++) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>try {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const proxyUrl = PROXIES[i] + encodeURIComponent(url);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const response = await fetch(proxyUrl, {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>headers: {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>});</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (response.ok) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>return await response.text();</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} catch (e) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>console.log(`Proxy ${i} failed:`, e);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>continue;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>throw new Error('All proxies failed');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Extract image URLs from Pinterest page HTML</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function extractImagesFromHTML(html, boardUrl) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const imageUrls = new Set();</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Method 1: Find all img tags with pinimg.com</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const imgRegex = /&lt;img[^&gt;]+src=["'](https?:\/\/i\.pinimg\.com\/[^"']+\.(jpg|png|jpeg|webp))["']/gi;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let match;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>while ((match = imgRegex.exec(html)) !== null) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let imgUrl = match[1];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Convert to original size</p>
+<p class="p1"><span class="Apple-converted-space">            </span>imgUrl = imgUrl.replace(/\/\d+x\d+/, '/originals');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>imgUrl = imgUrl.replace(/\/\d+x\//, '/originals/');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>imageUrls.add(imgUrl);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Method 2: Find images in JSON data (Pinterest stores rich data)</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const jsonRegex = /&lt;script[^&gt;]*type=["']application\/json["'][^&gt;]*&gt;([\s\S]*?)&lt;\/script&gt;/gi;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let jsonMatch;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>while ((jsonMatch = jsonRegex.exec(html)) !== null) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>try {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const data = JSON.parse(jsonMatch[1]);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const extractFromObj = (obj) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (!obj) return;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (typeof obj === 'string') {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>if (obj.includes('i.pinimg.com') &amp;&amp; (obj.includes('.jpg') || obj.includes('.png') || obj.includes('.jpeg'))) {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>let clean = obj.replace(/\/\d+x\d+/, '/originals');</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>imageUrls.add(clean);</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>} else if (Array.isArray(obj)) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>obj.forEach(extractFromObj);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>} else if (typeof obj === 'object') {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>Object.values(obj).forEach(extractFromObj);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>};</p>
+<p class="p1"><span class="Apple-converted-space">                </span>extractFromObj(data);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} catch(e) {}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Method 3: Look for data-src and other attributes</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const dataSrcRegex = /data-src=["'](https?:\/\/i\.pinimg\.com\/[^"']+\.(jpg|png|jpeg|webp))["']/gi;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>while ((match = dataSrcRegex.exec(html)) !== null) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let imgUrl = match[1].replace(/\/\d+x\d+/, '/originals');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>imageUrls.add(imgUrl);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>return Array.from(imageUrls);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Download and create ZIP file</p>
+<p class="p1"><span class="Apple-converted-space">    </span>async function downloadImagesAsZip(imageUrls, boardName) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const JSZip = window.JSZip;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if (!JSZip) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>throw new Error('JSZip library not loaded');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>const zip = new JSZip();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let downloaded = 0;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let failed = 0;</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>updateStatus(`📸 downloading ${imageUrls.length} images...`, true, false, `0/${imageUrls.length}`);</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Download images in parallel with concurrency limit</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const concurrency = 5;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const batches = [];</p>
+<p class="p1"><span class="Apple-converted-space">        </span>for (let i = 0; i &lt; imageUrls.length; i += concurrency) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>batches.push(imageUrls.slice(i, i + concurrency));</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>for (let batchIndex = 0; batchIndex &lt; batches.length; batchIndex++) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const batch = batches[batchIndex];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const promises = batch.map(async (imgUrl, idx) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>try {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const response = await fetch(imgUrl, {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>headers: { 'User-Agent': 'Mozilla/5.0' }</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>});</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (response.ok) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>const blob = await response.blob();</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>const ext = imgUrl.includes('.png') ? 'png' : 'jpg';</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>const filename = `image_${String(downloaded + failed + idx + 1).padStart(3, '0')}.${ext}`;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>zip.file(filename, blob);</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>downloaded++;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>failed++;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>} catch (e) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>failed++;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>console.warn(`Failed: ${imgUrl}`);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>updateStatus(`💖 downloading images...`, true, false, `${downloaded + failed}/${imageUrls.length}`);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">            </span>await Promise.all(promises);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>updateStatus(`✨ zipping ${downloaded} images...`, true, false);</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>const zipBlob = await zip.generateAsync({ type: 'blob' });</p>
+<p class="p1"><span class="Apple-converted-space">        </span>return { zipBlob, downloaded, failed };</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Main function to process Pinterest URL</p>
+<p class="p1"><span class="Apple-converted-space">    </span>async function processPinterestUrl(pinterestUrl) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Clean and validate URL</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let cleanUrl = pinterestUrl.trim();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if (!cleanUrl.startsWith('http')) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cleanUrl = 'https://' + cleanUrl;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>if (!cleanUrl.includes('pinterest.com') &amp;&amp; !cleanUrl.includes('pin.it')) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>throw new Error('Please enter a valid Pinterest URL 💕');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Expand pin.it shortlinks</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if (cleanUrl.includes('pin.it')) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>updateStatus(`🔗 expanding Pinterest link...`, true, false);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const response = await fetch(cleanUrl, { method: 'HEAD', redirect: 'follow' });</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cleanUrl = response.url;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>updateStatus(`🌸 loading Pinterest board...`, true, false);</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Fetch the page</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const html = await fetchWithProxy(cleanUrl);</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>if (!html || html.length &lt; 500) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>throw new Error('Could not load the Pinterest page. Make sure the board is public!');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>updateStatus(`🔍 finding all beautiful images...`, true, false);</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Extract images</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const imageUrls = extractImagesFromHTML(html, cleanUrl);</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>if (imageUrls.length === 0) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>throw new Error('No images found 😢. Is this board public? Try another board or pin!');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Remove duplicates and limit to reasonable amount</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const uniqueImages = [...new Set(imageUrls)];</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const maxImages = 200; // Safe limit for browser performance</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const imagesToDownload = uniqueImages.slice(0, maxImages);</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>updateStatus(`🎀 found ${uniqueImages.length} images! ${uniqueImages.length &gt; maxImages ? `(downloading first ${maxImages})` : ''}`, true, false);</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Generate board name for ZIP</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let boardName = 'pinterest_board';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const boardMatch = cleanUrl.match(/pinterest\.com\/[^\/]+\/([^\/?]+)/);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if (boardMatch) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>boardName = boardMatch[1];</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Download and create ZIP</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const { zipBlob, downloaded, failed } = await downloadImagesAsZip(imagesToDownload, boardName);</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>if (downloaded === 0) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>throw new Error('Could not download any images. Please try again!');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Trigger download</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const downloadUrl = URL.createObjectURL(zipBlob);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const a = document.createElement('a');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>a.href = downloadUrl;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>a.download = `${boardName}_pinterest_images.zip`;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.body.appendChild(a);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>a.click();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.body.removeChild(a);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>URL.revokeObjectURL(downloadUrl);</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>updateStatus(`🎉 SUCCESS! Downloaded ${downloaded} images ${failed &gt; 0 ? `(${failed} failed)` : ''} 🎉`, false, false);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>return true;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Handle download button click</p>
+<p class="p1"><span class="Apple-converted-space">    </span>async function handleDownload() {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const url = urlInput.value.trim();</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>if (!url) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>updateStatus('💕 Please enter a Pinterest board or pin URL first!', false, true);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>return;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>downloadBtn.disabled = true;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>downloadBtn.innerHTML = '⏳🌸 PROCESSING... 🌸⏳';</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>try {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>await processPinterestUrl(url);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>} catch (error) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>console.error(error);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let errorMsg = error.message;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (errorMsg.includes('proxy') || errorMsg.includes('fetch')) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>errorMsg = 'Network issue. Please check your connection and try again! 💔';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>updateStatus(`❌ ${errorMsg}`, false, true);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>} finally {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>downloadBtn.disabled = false;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>downloadBtn.innerHTML = '💖🌸 DOWNLOAD ZIP 🌸💖';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Event listeners</p>
+<p class="p1"><span class="Apple-converted-space">    </span>downloadBtn.addEventListener('click', handleDownload);</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Example badges</p>
+<p class="p1"><span class="Apple-converted-space">    </span>document.querySelectorAll('.example-badge').forEach(badge =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>badge.addEventListener('click', () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const exampleUrl = badge.getAttribute('data-url');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>urlInput.value = exampleUrl;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>updateStatus(`✨ example loaded! click download to try ✨`, false, false);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Enter key support</p>
+<p class="p1"><span class="Apple-converted-space">    </span>urlInput.addEventListener('keypress', (e) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if (e.key === 'Enter') {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>handleDownload();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Load JSZip library dynamically</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function loadJSZip() {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>return new Promise((resolve, reject) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (window.JSZip) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>resolve();</p>
+<p class="p1"><span class="Apple-converted-space">                </span>return;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const script = document.createElement('script');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>script.onload = resolve;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>script.onerror = reject;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.head.appendChild(script);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Initialize</p>
+<p class="p1"><span class="Apple-converted-space">    </span>loadJSZip().catch(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>updateStatus('⚠️ Loading libraries... please refresh if stuck', false, true);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>updateStatus('💖 ready! paste any public Pinterest board URL above 💖', false, false);</p>
+<p class="p1">&lt;/script&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;!-- JSZip CDN --&gt;</p>
+<p class="p1">&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"&gt;&lt;/script&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
